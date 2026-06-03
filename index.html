@@ -123,25 +123,72 @@
       </p>
     </div>
   </section>
-
-  <!-- FORM DOA -->
+  
+<!-- FORM DOA (VERSI PREMIUM TANPA REFRESH HALAMAN) -->
   <section id="form-doa" class="py-16 px-4 max-w-2xl mx-auto">
     <div class="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl shadow-xl">
       <h2 class="text-3xl font-extrabold text-center mb-2 text-white">Form Permohonan Doa</h2>
-      <p class="text-center text-slate-300 mb-6 text-base">Anda ada beban doa dan pergumulan? Tulis permohonan doa anda di bawah ini.</p>
+      <p class="text-center text-slate-300 mb-6 text-base">Ada beban yang ingin didukung? Tulis permohonan doa Anda di bawah ini.</p>
       
-      <form action="https://script.google.com/macros/s/AKfycbyZTGBGJWzepMNYU-akz5dUnM6ABRTThZinuSQKYmGm9phxJoXICa8EdDvo6UWkOl5Cqg/exec" method="POST" class="space-y-4">
+      <!-- ID diganti jadi 'prayer-form' dan action tetap diisi URL Web App Google lu -->
+      <form id="prayer-form" action="https://script.google.com/macros/s/AKfycbyZTGBGJWzepMNYU-akz5dUnM6ABRTThZinuSQKYmGm9phxJoXICa8EdDvo6UWkOl5Cqg/exec" method="POST" class="space-y-4">
         <input type="text" name="nama" placeholder="Nama Lengkap" class="w-full bg-slate-900/80 border border-white/20 p-4 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-sky-400 text-lg" required>
         <input type="tel" name="wa" placeholder="No WhatsApp" class="w-full bg-slate-900/80 border border-white/20 p-4 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-sky-400 text-lg" required>
         <textarea name="doa" placeholder="Tulis pokok doa Anda secara detail..." rows="4" class="w-full bg-slate-900/80 border border-white/20 p-4 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-sky-400 text-lg" required></textarea>
         
-        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-500 hover:to-sky-400 text-white py-4 rounded-xl font-bold text-lg shadow-lg transform hover:-translate-y-0.5 transition-all duration-150">
+        <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-500 hover:to-sky-400 text-white py-4 rounded-xl font-bold text-lg shadow-lg transform hover:-translate-y-0.5 transition-all duration-150">
           Kirim Pokok Doa ke Tim Doa
         </button>
       </form>
+
+      <!-- Kotak Notifikasi Sukses Tersembunyi (Akan muncul pakai efek transisi) -->
+      <div id="success-message" class="hidden mt-4 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 p-4 rounded-xl text-center text-lg font-semibold backdrop-blur-md">
+        🙏 Puji Tuhan, permohonan doa Anda sudah diterima oleh Tim Doa GBI PPL Majesty. Tuhan Yesus memberkati!
+      </div>
+      
       <p class="text-sm text-sky-300/80 mt-4 text-center italic">*Tim doa kami akan memegang privasi data Anda dengan aman dan mendoakannya secara khusus.</p>
     </div>
   </section>
+
+  <!-- Tambahkan script ini di bagian bawah sebelum tag </body> untuk handle pengiriman silent -->
+  <script>
+    document.getElementById('prayer-form').addEventListener('submit', function(e) {
+      e.preventDefault(); // Mencegah halaman reload atau pindah layar
+      
+      const form = this;
+      const button = document.getElementById('submit-btn');
+      const msgBox = document.getElementById('success-message');
+      
+      // TIPS 1: Kunci tombol instan & ubah teks agar tidak bisa di-klik dobel
+      button.disabled = true;
+      button.style.opacity = "0.5";
+      button.innerText = 'Mohon Tunggu, Doa Sedang Dikirim...';
+      
+      // Kirim data secara background via Fetch API
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        mode: 'no-cors' 
+      })
+      .then(() => {
+        // TIPS 2: Sembunyikan form secara total agar tidak bisa di-submit lagi
+        form.classList.add('hidden');
+        
+        // Tampilkan kotak notifikasi sukses
+        msgBox.classList.remove('hidden');
+        
+        // TIPS 3: Reset/bersihkan semua kotak inputan di memory browser
+        form.reset();
+      })
+      .catch(error => {
+        // Jika gagal koneksi, buka kembali kuncinya agar bisa coba lagi
+        alert('Waduh, ada gangguan koneksi. Coba ulangi lagi ya, Bro!');
+        button.disabled = false;
+        button.style.opacity = "1";
+        button.innerText = 'Kirim Pokok Doa ke Tim Doa';
+      });
+    });
+  </script>
 
   <!-- KEGIATAN RUTIN -->
   <section id="kegiatan" class="py-20 px-5 bg-white/5 border-t border-white/5">
