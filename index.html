@@ -271,5 +271,63 @@
     });
   </script>
 
+async function loadPengumuman() {
+      const container = document.getElementById('pengumuman-container');
+      
+      try {
+        const response = await fetch('pengumuman.json');
+        if (!response.ok) throw new Error('Gagal mengambil data warta');
+        
+        const data = await response.json();
+        container.innerHTML = '';
+        
+        if(data.length === 0) {
+          container.innerHTML = `<p class="text-center col-span-full text-slate-400 italic py-6 text-lg">Belum ada pengumuman baru minggu ini.</p>`;
+          return;
+        }
+
+        data.forEach(item => {
+          const card = document.createElement('div');
+          // Desain card: Glassmorphic + Overflow Hidden (agar potongan gambar rapi di sudut melengkung)
+          card.className = "bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg transform hover:-translate-y-2 hover:border-sky-400/40 hover:bg-slate-900/60 transition-all duration-300 flex flex-col justify-between overflow-hidden group";
+          
+          // Logika Taktis: Jika di JSON ada data gambarnya, buat elemen HTML <img>. Jika kosong, tidak usah dimunculkan.
+          const komponenGambar = item.gambar 
+            ? `<div class="w-full h-48 overflow-hidden relative">
+                 <img src="${item.gambar}" alt="${item.judul}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+               </div>` 
+            : '';
+
+          card.innerHTML = `
+            ${komponenGambar}
+            <div class="p-6 flex-grow flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-4">
+                  <span class="bg-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-sky-500/30">
+                    ${item.badge}
+                  </span>
+                  <span class="text-amber-400 text-xl">📅</span>
+                </div>
+                <h3 class="font-extrabold text-xl text-white mb-2 tracking-tight">${item.judul}</h3>
+                <p class="text-amber-300/90 text-sm font-semibold mb-3">${item.tanggal}</p>
+                <p class="text-slate-300 text-base leading-relaxed mb-4">${item.keterangan}</p>
+              </div>
+              <div class="pt-2 border-t border-white/5">
+                <a href="#contact" class="text-sm font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+                  Hubungi Sekretariat <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                </a>
+              </div>
+            </div>
+          `;
+          
+          container.appendChild(card);
+        });
+
+      } catch (error) {
+        console.error(error);
+        container.innerHTML = `<p class="text-center col-span-full text-rose-400 font-semibold py-6">⚠️ Gagal memuat pengumuman. Coba refresh halaman.</p>`;
+      }
+    }
+  
 </body>
 </html>
