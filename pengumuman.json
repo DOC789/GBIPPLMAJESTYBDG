@@ -5,7 +5,7 @@
     "tanggal": "25 Juli 2026",
     "keterangan": "Mengatasi Gejolak Keuangan di masa sulit, silakan hubungi sekretariat gereja.",
     "badge": "Seminar di Victory Hall Majesty",
-    "gambar": "<img src="https://i.ibb.co.com/TXnNpGd/Whats-App-Image-2026-06-13-at-09-41-24.jpg" alt="Whats App Image 2026 06 13 at 09 41 24" border="0">" 
+    "gambar": "<img src="https://i.ibb.co.com/TXnNpGd/Whats-App-Image-2026-06-13-at-09-41-24.jpg" 
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "tanggal": "Setiap Selasa",
     "keterangan": "Join Komunitas Sel baik secara online maupun Onsite",
     "badge": "Komsel",
-    "gambar":""
+    "gambar":"<img src="https://i.ibb.co.com/0jyBj262/Pe-Ka-Flyer.jpg" alt="Pe Ka Flyer" border="0">"
   },
  {
     "id": 4,
