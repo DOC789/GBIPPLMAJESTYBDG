@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "judul": "Penyerahan Anak",
-    "tanggal": "Setiap minggu pertama di Ibadah kedua",
-    "keterangan": "Bagi orang tua yang rindu menyerahkan buah hatinya, silakan menghubungi sekretariat gereja.",
-    "badge": "Penting",
-    "gambar": "https://i.ibb.co.com/DfRqvPCn/Whats-App-Image-2026-06-03-at-17-13-22-1.jpg" 
+    "judul": "Seminar Bisnis & Keuangan",
+    "tanggal": "25 Juli 2026",
+    "keterangan": "Mengatasi Gejolak Keuangan di masa sulit, silakan hubungi sekretariat gereja.",
+    "badge": "Seminar di Victory Hall Majesty",
+    "gambar": "<img src="https://i.ibb.co.com/TXnNpGd/Whats-App-Image-2026-06-13-at-09-41-24.jpg" alt="Whats App Image 2026 06 13 at 09 41 24" border="0">" 
   },
   {
     "id": 2,
@@ -17,11 +17,11 @@
   },
   {
     "id": 3,
-    "judul": "Sunday School Retreat - be the Light",
-    "tanggal": "26 - 28 Juni 2026",
-    "keterangan": "Retreat anak-anak Sekolah Minggu dengan aktivitas seru, outdoor games, biblical story dan group sharing.",
-    "badge": "Anak",
-    "gambar":"https://i.ibb.co.com/TDSDq8fx/Whats-App-Image-2026-06-03-at-17-13-21-1.jpg"
+    "judul": "PeKA",
+    "tanggal": "Setiap Selasa",
+    "keterangan": "Join Komunitas Sel baik secara online maupun Onsite",
+    "badge": "Komsel",
+    "gambar":""
   },
  {
     "id": 4,
